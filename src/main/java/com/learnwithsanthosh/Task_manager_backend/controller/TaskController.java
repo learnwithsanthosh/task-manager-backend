@@ -5,10 +5,7 @@ import com.learnwithsanthosh.Task_manager_backend.entity.Task;
 import com.learnwithsanthosh.Task_manager_backend.service.TaskService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,15 @@ public class TaskController {
     @PostMapping("/save")
     public void saveTask(@RequestBody Task task){
         taskService.save(task);
+    }
+
+    @PutMapping("/task/{id}")
+    public void updateTask(@RequestBody Task task, @PathVariable int id){
+        taskService.updateTask(task,id);
+    }
+
+    @DeleteMapping("/task/{id}")
+    public void deleteTask(@PathVariable int id){
+        taskService.deletebyid(id);
     }
 }

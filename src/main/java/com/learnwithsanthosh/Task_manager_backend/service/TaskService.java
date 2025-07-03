@@ -24,4 +24,19 @@ public class TaskService {
     public void save(Task task) {
         taskRepository.save(task);
     }
+
+    public void updateTask(Task task, int id) {
+        Task dbTask=taskRepository.findById(id).get();
+        if(dbTask.equals(null)){
+            throw new RuntimeException("Task for id not present");
+        }
+        dbTask.setDescription(task.getDescription());
+        dbTask.setTitle(task.getTitle());
+        dbTask.setCompleted(task.isCompleted());
+        taskRepository.save(dbTask);
+    }
+
+    public void deletebyid(int id) {
+        taskRepository.deleteById(id);
+    }
 }
